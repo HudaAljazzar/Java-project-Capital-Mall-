@@ -1,0 +1,890 @@
+
+package capital_mall;
+import java.util.Scanner;
+import java.io.*;
+public class Capital_Mall {
+    //First linkedList (workers)
+    private class Node_worker { 
+		String name; 
+                int id;
+                String phone;    
+                float salary;
+                
+		Node_worker next; 
+	} 
+       	Node_worker head_w;
+        
+        
+    //Second linkedList (Clothing and shoes department)   
+    private class Node_clothes_shoes { 
+		String type;    //the type of clothes
+                String size;    //the size of clothes type
+                float price;    //the pric for each clothes type
+                int id_worker;  // id is which worker work in chothes department
+		Node_clothes_shoes next; 
+                
+	} 
+       	Node_clothes_shoes head_c_s; 
+    
+
+   //Third LinkedList (resturant)   
+    private class Node_resturant { 
+		String category;    //the category of food
+                float price;        //the pric for each Food category 
+                int id_worker;      // id is which worker work in resturant 
+		Node_resturant next; 
+	} 
+       	Node_resturant head_r;  
+        
+        
+      //ADD Node to worker linked list
+      public Capital_Mall insert_w(Capital_Mall list,String name1,int id1,String phone1,float salary1) 
+	{ 
+		// Create a new node with given data 
+		Node_worker new_node = new Node_worker(); 
+		new_node.next = null;
+                new_node.name=name1;
+                new_node.id=id1;
+                new_node.phone=phone1;
+                new_node.salary=salary1;
+              
+
+		if (list.head_w == null) { 
+			list.head_w = new_node; 
+		} 
+		else { 			
+			Node_worker last = list.head_w; 
+			while (last.next != null) { 
+			      last = last.next; 
+		     } 
+
+			// Insert the new_node at last node 
+			last.next = new_node; 
+		} 
+
+		// Return the list by head 
+		return list; 
+	} 
+    
+        
+       // Add Node to clothes and shoes linked list
+           public  Capital_Mall insert_c_s(Capital_Mall list,String type1,String size1,float price1,int id_w) 
+	{ 
+		// Create a new node with given data 
+		Node_clothes_shoes new_node = new Node_clothes_shoes(); 
+		new_node.next = null;
+                new_node.type=type1;
+                new_node.size=size1;
+                new_node.price=price1;
+                new_node.id_worker=id_w;
+
+
+		if (list.head_c_s == null) { 
+			list.head_c_s = new_node; 
+		} 
+		else { 			
+			Node_clothes_shoes last = list.head_c_s; 
+			while (last.next != null) { 
+			      last = last.next; 
+		     } 
+
+			// Insert the new_node at last node 
+			last.next = new_node; 
+		} 
+
+		// Return the list by head 
+		return list; 
+	}
+    
+    
+    // Add Node to resturant linked list
+    public Capital_Mall insert_r(Capital_Mall list,String  category1,float price1,int id_w) 
+	{ 
+		// Create a new node with given data 
+		Node_resturant new_node = new Node_resturant(); 
+		new_node.next = null;
+                new_node.category=category1;
+                new_node.price=price1;
+                new_node.id_worker=id_w;
+
+
+		if (list.head_r == null) { 
+			list.head_r = new_node; 
+		} 
+		else { 			
+			Node_resturant last = list.head_r; 
+			while (last.next != null) { 
+			      last = last.next; 
+		     } 
+
+			// Insert the new_node at last node 
+			last.next = new_node; 
+		} 
+
+		// Return the list by head 
+		return list; 
+	} 
+    
+    public void travers_show_w(Capital_Mall list) 
+	{ 
+		Node_worker currNode = list.head_w; 
+		System.out.print("LinkedList Worker:\nNAME   ID   PHONE   SALARY\n"); 
+		               
+		while (currNode != null)
+                    { 
+			System.out.println(currNode.name + "  "+ currNode.id+"  "+
+                           currNode.phone+"   "+currNode.salary); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+    
+    
+    public void travers_show_c_s(Capital_Mall list) 
+	{ 
+		Node_clothes_shoes currNode = list.head_c_s; 
+		System.out.print("LinkedList clothes : \nTYPE    SIZE   PRICE\n"); 
+		               
+		while (currNode != null)
+                    { 
+			System.out.println(currNode.type+ "  "+ currNode.size+"  "+
+                           currNode.price+"  "+currNode.id_worker); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+    
+    public void travers_show_r(Capital_Mall list) 
+	{ 
+		Node_resturant currNode = list.head_r; 
+		System.out.print("LinkedList resturant :\nCATEGORY   PRICE\n "); 
+		               
+		while (currNode != null)
+                    { 
+			System.out.println(currNode.category+ "  "+ currNode.price+"  "+currNode.id_worker); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+   
+     public void show_wMore500(Capital_Mall list) 
+	{ 
+		Node_worker currNode = list.head_w; 
+		System.out.print("LinkedList Worker that salary more than 500$ : \nNAME   ID   PHONE   SALARY\n"); 
+		               
+		while (currNode != null)
+                    {  
+                        if(currNode.salary>=500.0)
+			    System.out.println(currNode.name + "  "+ currNode.id+"  "+
+                            currNode.phone+"  "+currNode.salary); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       }
+     
+     public void show_C_Price50(Capital_Mall list) 
+	{ 
+		Node_clothes_shoes currNode = list.head_c_s; 
+		System.out.print("LinkedList clothes that price is 50 : \nTYPE    SIZE   PRICE\n"); 
+		               
+		while (currNode != null)
+                    {  
+                        if(currNode.price==50)
+			System.out.println(currNode.type+ "  "+ currNode.size); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+      public void show_wInResturant(Capital_Mall list) 
+	{ 
+		Node_worker currNode = list.head_w; 
+                Node_resturant ptr = list.head_r; 
+
+		System.out.print("LinkedList worker that work in clothes and shoes department:"); 
+		               
+		while (currNode != null)
+                    {  
+                        if(currNode.id==ptr.id_worker)
+			System.out.println(currNode.name+ "  "+currNode.id+"  "+ currNode.phone+"  "+currNode.salary); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+      
+      public void show_wInClothes(Capital_Mall list) 
+	{ 
+		Node_worker currNode = list.head_w; 
+                Node_clothes_shoes ptr = list.head_c_s; 
+
+		System.out.print("LinkedList worker that work in clothes and shoes department:"); 
+		               
+		while (currNode != null)
+                    {  
+                        if(currNode.id==ptr.id_worker)
+			System.out.println(currNode.name+ "  "+ currNode.phone+"  "+currNode.salary); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+     
+      public void remove_w(Capital_Mall list,String name1) 
+	{ 
+		Node_worker nodePtr,previousNode = null;
+		if (head_w.name.equalsIgnoreCase(name1)) { 
+			head_w = head_w.next; 
+		} 
+		else { 
+			nodePtr = head_w;
+                        while (nodePtr != null && nodePtr.name != name1)
+                        {
+                            previousNode = nodePtr;
+                            nodePtr = nodePtr.next;
+                        }
+                        previousNode.next = nodePtr.next;
+		} 
+          System.out.println("The node has been deleted ");
+		
+		
+	} 
+      
+    public void remove_c_s(Capital_Mall list,String type1) 
+	{ 
+		Node_clothes_shoes nodePtr,previousNode = null;
+		if (head_c_s.type.equalsIgnoreCase(type1)) { 
+			head_c_s = head_c_s.next; 
+		} 
+		else { 
+			nodePtr = head_c_s;
+                        while (nodePtr != null && nodePtr.type != type1)
+                        {
+                            previousNode = nodePtr;
+                            nodePtr = nodePtr.next;
+                        }
+                        previousNode.next = nodePtr.next;
+		} 
+       System.out.println("The node has been deleted ");
+		
+	} 
+    
+    public void remove_r(Capital_Mall list,String catogary1) 
+	{ 
+		Node_resturant nodePtr,previousNode = null;
+		if (head_r.category.equalsIgnoreCase(catogary1)) { 
+			head_r = head_r.next; 
+		} 
+		else { 
+			nodePtr = head_r;
+                        while (nodePtr != null && nodePtr.category != catogary1)
+                        {
+                            previousNode = nodePtr;
+                            nodePtr = nodePtr.next;
+                        }
+                        previousNode.next = nodePtr.next;
+		} 
+          System.out.println("The node has been deleted ");
+		
+        }
+    
+    
+    // search methodes
+    public void searchName(Capital_Mall list) 
+	{ 
+		Node_worker currNode = list.head_w; 
+		System.out.print("LinkedList Worker:search about NAME of worker\n"); 
+		               
+		while (currNode != null)
+                    { 
+			System.out.println(currNode.name); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+     public void searchType(Capital_Mall list) 
+	{ 
+		Node_clothes_shoes currNode = list.head_c_s; 
+		System.out.print("Clothes/shoes department(types):\n"); 
+		               
+		while (currNode != null)
+                    { 
+			System.out.println(currNode.type); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+       public void searchMainMeal(Capital_Mall list) 
+	{ 
+		Node_resturant currNode = list.head_r; 
+		System.out.print("Resturant named of main meal:\n"); 
+		               
+		while (currNode != null)
+                    { 
+			System.out.println(currNode.category); 
+                      
+			// Go to next node 
+		 	currNode = currNode.next;
+                    }
+       } 
+       
+       //Update Worker linked list
+       public static void update_w_n(Capital_Mall list,String name,String newName)
+       {
+         
+          Node_worker ptr=list.head_w;           
+	  while(ptr!=null&& !ptr.name.equalsIgnoreCase(name))
+            ptr=ptr.next;
+          ptr.name=newName;
+          System.out.println(" The update was successful..! ");
+       }
+       
+       
+       
+       
+       public static void update_w_id(Capital_Mall list,int id,int newId)
+       {
+         
+          Node_worker ptr=list.head_w;           
+	  while(ptr!=null&& ptr.id!=id)
+            ptr=ptr.next;
+          ptr.id=newId;
+          System.out.println(" The update was successful..! ");
+
+       }
+        public static void update_w_ph(Capital_Mall list,String phone,String newPhone)
+       {
+         
+          Node_worker ptr=list.head_w;           
+	  while(ptr!=null&& !ptr.phone.equalsIgnoreCase(phone))
+            ptr=ptr.next;
+          ptr.phone=newPhone;
+          System.out.println(" The update was successful..! ");
+
+       }
+         public static void update_w_sa(Capital_Mall list,float salary,float newSalary)
+       {
+         
+          Node_worker ptr=list.head_w;           
+	  while(ptr!=null&& ptr.salary!=salary)
+            ptr=ptr.next;
+          ptr.salary=newSalary;         
+          System.out.println(" The update was successful..! ");
+
+       }
+       //Update clothes linked list
+          public static void update_c_T(Capital_Mall list,String type,String newType)
+       {
+         
+          Node_clothes_shoes ptr=list.head_c_s;           
+	  while(ptr!=null&& !ptr.type.equalsIgnoreCase(type))
+            ptr=ptr.next;
+          ptr.type=newType;         
+          System.out.println(" The update was successful..! ");
+
+       }
+          public static void update_c_S(Capital_Mall list,String size,String newSize)
+       {
+         
+          Node_clothes_shoes ptr=list.head_c_s;           
+	  while(ptr!=null&& !ptr.size.equalsIgnoreCase(size))
+            ptr=ptr.next;
+          ptr.size=newSize;         
+          System.out.println(" The update was successful..! ");
+
+       }
+          public static void update_c_p(Capital_Mall list,float price,float newPrice)
+       {
+         
+          Node_clothes_shoes ptr=list.head_c_s;           
+	  while(ptr!=null&& ptr.price!=price)
+            ptr=ptr.next;
+          ptr.price=newPrice;         
+          System.out.println(" The update was successful..! ");
+
+       }
+          public static void update_c_w(Capital_Mall list,int w_id,int neww_id)
+       {
+         
+          Node_clothes_shoes ptr=list.head_c_s;           
+	  while(ptr!=null&& ptr.id_worker!=w_id)
+            ptr=ptr.next;
+          ptr.id_worker=neww_id;         
+          System.out.println(" The update was successful..! ");
+
+       }
+      
+          
+        //Update resturant linked list
+          public static void update_r_ca(Capital_Mall list,String catogery,String newCatogery)
+       {
+         
+          Node_resturant ptr=list.head_r;           
+	  while(ptr!=null&& !ptr.category.equalsIgnoreCase(catogery))
+            ptr=ptr.next;
+          ptr.category=newCatogery;         
+       }
+           public static void update_r_pr(Capital_Mall list,float price,float newPrice)
+       {
+         
+          Node_resturant ptr=list.head_r;           
+	  while(ptr!=null&& ptr.price!=price)
+            ptr=ptr.next;
+          ptr.price=newPrice;         
+       }
+            public static void update_r_w(Capital_Mall list,int w_id,int neww_id)
+       {
+         
+          Node_resturant ptr=list.head_r;           
+	  while(ptr!=null&& ptr.id_worker!=w_id)
+            ptr=ptr.next;
+          ptr.id_worker=neww_id;         
+       }
+      //write data in worker linked list into file
+     public void storeFileWorker (Capital_Mall list)throws IOException
+       {
+                 Scanner keyboard=new Scanner(System.in);
+                 System.out.println("ENTER THE FILE NAME:");
+                 String filename= keyboard.next();
+                 //open the file 
+                 PrintWriter outputFile = new PrintWriter(filename);
+                 
+                 Node_worker ptr=list.head_w; 
+                 while(ptr!=null)
+                 {
+                  outputFile.println(ptr.name);
+                  outputFile.println(ptr.id);
+                  outputFile.println(ptr.phone);
+                  outputFile.println(ptr.salary);
+                  
+                  ptr=ptr.next;
+                  
+                 }
+                 
+                  // Close the file.
+                  outputFile.close();
+                  System.out.println("Workers Data written to the file.");             
+       }
+     
+     public void storeFileClothes (Capital_Mall list)throws IOException
+       {
+                 Scanner keyboard=new Scanner(System.in);
+                 System.out.println("ENTER THE FILE NAME:");
+                 String filename= keyboard.next();
+                 //open the file 
+                 PrintWriter outputFile = new PrintWriter(filename);
+                 
+                 Node_clothes_shoes ptr=list.head_c_s; 
+                 while(ptr!=null)
+                 {
+                  outputFile.println(ptr.type);
+                  outputFile.println(ptr.size);
+                  outputFile.println(ptr.price);
+                  outputFile.println(ptr.id_worker);
+                  
+                  ptr=ptr.next;
+                  
+                 }
+                 
+                  // Close the file.
+                  outputFile.close();
+                  System.out.println("Clothes department Data written to the file.");             
+       }
+
+     
+     public void storeFileResturant (Capital_Mall list)throws IOException
+       {
+                 Scanner keyboard=new Scanner(System.in);
+                 System.out.println("ENTER THE FILE NAME:");
+                 String filename= keyboard.next();
+                 //open the file 
+                 PrintWriter outputFile = new PrintWriter(filename);
+                 
+                 Node_resturant ptr=list.head_r; 
+                 while(ptr!=null)
+                 {
+                  outputFile.println(ptr.category);
+                  outputFile.println(ptr.price);
+                  outputFile.println(ptr.id_worker);
+                  
+                  ptr=ptr.next;
+                  
+                 }
+                 
+                  // Close the file.
+                  outputFile.close();
+                  System.out.println("Resturant Data written to the file.");             
+       }
+
+
+
+
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+    public static void main(String[] args) throws IOException {
+        //object to Scanner class
+        Scanner input=new Scanner(System.in);
+        
+        //objects to Capital_Mall class
+        Capital_Mall capital=new Capital_Mall();
+        
+        
+        String name,phone,type,size,category;
+        int id;
+        float price,salary;
+        System.out.println("..Welcome Dear User.. ");
+        
+        String choice1,ch;
+    do{
+       Menu();
+       System.out.println("Enter choice....");
+       int choice=input.nextInt();
+       int num_choice;
+       switch(choice)
+       {
+           case 1: 
+               do{
+                  System.out.println("\n\n^^...ADD Menu...^^\n\n^..1-Add To Worker list..^\n\n^..2-Add TO Clothes "
+                   + "And Shoes list..^\n\n^..3-Add To Resturant List..^\n\n^..4-EXIT..^\n");
+                   num_choice=input.nextInt();        
+                   switch(num_choice)
+                      {
+                       case 1:System.out.println("Enter the name of worker:");
+                              name=input.next();
+                              System.out.println("Enter the id of worker:");
+                              id=input.nextInt();
+                              System.out.println("Enter the phone of worker:");
+                              phone=input.next();
+                              System.out.println("Enter the Salary Of Worker:");
+                              salary=input.nextFloat();
+                              
+                             
+                              capital.insert_w(capital,name,id,phone,salary);
+                              System.out.println("..Successfully Added..");break;
+
+                       case 2:System.out.println("Enter the type of clothes or shoes:");
+                              type=input.next();
+                              System.out.println("Enter the size of clothes or shoes:");
+                              size=input.next();
+                              System.out.println("Enter the price of clothes or shose:");
+                              price=input.nextFloat();
+                              System.out.println("Enter the id Of Worker:");
+                              id=input.nextInt();
+                              
+                             
+                              capital.insert_c_s(capital,type,size,price,id);
+                              System.out.println("..Successfully Added..");break;
+
+                       case 3:System.out.println("Enter the category of the main meal:");
+                              category=input.next();
+                              System.out.println("Enter the price of this meal:");
+                              price=input.nextFloat();                      
+                              System.out.println("Enter the id Of Worker:");
+                              id=input.nextInt();
+                              
+                              capital.insert_r(capital,category,price,id);
+                              System.out.println("..Successfully Added..");break;
+                           
+                       case 4:System.out.println("Exit...");break;
+                       
+                       default:System.out.println("Wrong input..");                   
+                      }
+                     System.out.println("\n...Return to the SubMenu(Y/N)...");
+                     choice1=input.next();
+                   
+                    }while(choice1.equalsIgnoreCase("y"));break;
+                    
+       
+       
+         case 2: do{ 
+             
+                  System.out.println("Update Menu:\n1-Update worker linked list"
+                  + "\n2-update chothes linked list\n3-update resturant linked"
+                  + "list\n4-Exit... ");
+                  System.out.println("Enter choice..");
+                   num_choice=input.nextInt();        
+                         switch(num_choice)
+                         {
+                            case 1:do{
+                                         System.out.println("\n1-Update Name"
+                                         + "\n2-update id\n3-update phone"
+                                         + "\n4-Update Salary\n5-Exit... ");
+                                         System.out.println("Enter choice..");
+                                         num_choice=input.nextInt();        
+                                         switch(num_choice)
+                                           {
+                                             case 1:System.out.println("Enter Name to change");
+                                                    String nameO=input.next();
+                                                    System.out.println("Enter new Name");
+                                                    String nameU=input.next();
+                                                    capital.update_w_n(capital,nameO,nameU);break;
+                                                 
+                                             case 2:System.out.println("Enter  id that want to changee");
+                                                    int idO=input.nextInt();
+                                                    System.out.println("Enter new id");
+                                                    int idU=input.nextInt();
+                                                    capital.update_w_id(capital,idO,idU);break;
+                                                 
+                                             case 3:System.out.println("Enter old phone to change");
+                                                    String phoneO=input.next();
+                                                    System.out.println("Enter new phone");
+                                                    String phoneU=input.next();
+                                                    capital.update_w_ph(capital,phoneO,phoneU);break;
+                                                 
+                                             case 4:System.out.println("Enter old Salary to change");
+                                                    float salaryO=input.nextFloat();
+                                                    System.out.println("Enter new Salary");
+                                                    float salaryU=input.nextFloat();
+                                                    capital.update_w_sa(capital,salaryO,salaryU);break;
+                                             case 5:System.out.println("Exit...");break;
+                                             default: System.out.println("Wrong input..");                                            
+                                             
+                                           }
+                            
+                                         System.out.println("\n...Return to the SubMenu(Y/N)...");
+                                         choice1=input.next();
+                                      }while(choice1.equalsIgnoreCase("y"));break;                         
+                                                                                     
+                            case 2:do{
+                                         System.out.println("\n1-Update Type"
+                                         + "\n2-update Size\n3-update Price"
+                                         + "\n4-Update Worker_id\n5-Exit... ");
+                                         System.out.println("Enter choice..");
+                                         num_choice=input.nextInt();        
+                                         switch(num_choice)
+                                           {
+                                             case 1:System.out.println("Enter old Type of clothes to change");
+                                                    String typeO=input.next();
+                                                    System.out.println("Enter new Type of clothes");
+                                                    String typeU=input.next();
+                                                    capital.update_c_T(capital,typeO,typeU);break;
+                                                 
+                                             case 2:System.out.println("Enter old Size to change");
+                                                    String sizeO=input.next();
+                                                    System.out.println("Enter new Size");
+                                                    String sizeU=input.next();
+                                                    capital.update_c_S(capital,sizeO,sizeU);break;
+                                                 
+                                             case 3:System.out.println("Enter old Price to change");
+                                                    float priceO=input.nextFloat();
+                                                    System.out.println("Enter new Price");
+                                                    float priceU=input.nextFloat();
+                                                    capital.update_c_p(capital,priceO,priceU);break;
+                                                 
+                                             case 4:System.out.println("Enter old Worker id to change");
+                                                    int w_idO=input.nextInt();
+                                                    System.out.println("Enter new Worker id");
+                                                    int w_idU=input.nextInt();
+                                                    capital.update_c_w(capital,w_idO,w_idU);break;
+                                             case 5:System.out.println("Exit...");break;
+                                             default: System.out.println("Wrong input..");                                            
+                                             
+                                           }
+                            
+                                         System.out.println("\n...Return to the SubMenu(Y/N)...");
+                                         choice1=input.next();
+                                      }while(choice1.equalsIgnoreCase("y"));break;
+
+                            case 3:do{
+                                         System.out.println("\n1-Update Catogery"
+                                         + "\n2-update Price\n3-update Worker_id"
+                                         + "\n4-Exit... ");
+                                         System.out.println("Enter choice..");
+                                         num_choice=input.nextInt();        
+                                         switch(num_choice)
+                                           {
+                                             case 1:System.out.println("Enter OLD Catogery Meal to chand=ge");
+                                                    String catogeryO=input.next();
+                                                    System.out.println("Enter new Catogery main meal");
+                                                    String catogeryU=input.next();
+                                                    capital.update_r_ca(capital,catogeryO,catogeryU);break;
+                                       
+                                                 
+                                             case 2:System.out.println("Enter old Price to change");
+                                                    float priceO=input.nextFloat();
+                                                    System.out.println("Enter new Price");
+                                                    float priceU=input.nextFloat();
+                                                    capital.update_r_pr(capital,priceO,priceU);break;
+                                                 
+                                             case 3:System.out.println("Enter Old Worker id to change");
+                                                    int w_idO=input.nextInt();
+                                                    System.out.println("Enter new Worker id");
+                                                    int w_idU=input.nextInt();
+                                                    capital.update_r_w(capital,w_idO,w_idU);break;
+                                             case 4:System.out.println("Exit...");break;
+                                             default: System.out.println("Wrong input..");                                            
+                                             
+                                           }
+                            
+                                         System.out.println("\n...Return to the SubMenu(Y/N)...");
+                                         choice1=input.next();
+                                      }while(choice1.equalsIgnoreCase("y"));break;
+          
+                            case 4:System.out.println("Exit...");break;
+                       
+                            default:System.out.println("Wrong input..");                   
+                        }
+                       System.out.println("\n...Return to the SubMenu(Y/N)...");
+                       choice1=input.next();
+                   
+                    }while(choice1.equalsIgnoreCase("y"));break;
+             
+               
+          case 3:do{
+                        System.out.println("\n\n...Search Menu...\n1-Searsh about worker names.\n\n2-Search about "
+                         + "typed of " + "chothes/shoes "
+                         + "\n\n3-Search about main meal.\n\n4-EXIT.");
+                         num_choice=input.nextInt();        
+                         switch(num_choice)
+                         {
+                            case 1:capital.searchName(capital);break;                         
+                                                                                     
+                            case 2:capital.searchType(capital);break;
+
+                            case 3:capital.searchMainMeal(capital);break;
+                            
+                            case 4:System.out.println("Exit...");break;
+                       
+                            default:System.out.println("Wrong input..");                   
+                        }
+                       System.out.println("\n...Return to the SubMenu(Y/N)...");
+                       choice1=input.next();
+                   
+                    }while(choice1.equalsIgnoreCase("y"));break;
+                    
+          case 4: do{
+                    System.out.println("\n\nDelete Menu:\n1-Delete from Worker LinkedList\n"
+                    + "2-Delete from Clothes And Shoes LinkezsList\n3-Delete from Resturant LinkedList");
+                    System.out.println("Enter Your Choice:");
+                    num_choice=input.nextInt();        
+                    switch(num_choice){
+                        case 1: System.out.println("Enter the name of worker to delete it");
+                                name=input.next();
+                                capital.remove_w(capital, name);break;
+                            
+                        case 2: System.out.println("Enter the catogary of clothes to delete it");
+                                category=input.next();
+                                capital.remove_c_s(capital,category);break;
+                            
+                        case 3: System.out.println("Enter the type of main meal to delete it");
+                                type=input.next();
+                                capital.remove_r(capital, type);break;
+                            
+                        case 4: System.out.println("Exit...");break; 
+                            
+                        default :System.out.println("Wrong input ...");
+                     }
+                    System.out.println("\n...Return to the SubMenu(Y/N)...");
+                    choice1=input.next();
+                    
+                    }while(choice1.equalsIgnoreCase("y"));break;
+              
+              
+         case 5: do{
+                  System.out.println("\n\n...Reports Menu...\n1-Show ALL workers And Informatin About Them"
+                   + "\n2-Show All clothes Type And Price Of Them\n3-Show All The Resturant "
+                   + "Meals And Price Of Them\n4-Show all Worker That Salary Of Them More Than 500$"
+                   + "\n5-Show All Chothes Type That Price Of Them is 50 Shekel\n6-Show all worker that "
+                          + "work in clothes and shoes department\n7-Show all worker that works in ressturant\n"
+                          + "8-Exit..... ");
+               
+                  System.out.println("Enter Your Choice:");
+                  num_choice=input.nextInt();        
+                  switch(num_choice)
+                     {
+                       case 1: capital.travers_show_w(capital);break;
+                       case 2: capital.travers_show_c_s(capital);break;
+                       case 3: capital.travers_show_r(capital);break;
+                       case 4: capital.show_wMore500(capital);break;
+                       case 5: capital.show_C_Price50(capital);break;
+                       case 6: capital.show_wInClothes(capital);break;
+                       case 7: capital.show_wInResturant(capital);break;
+                       case 8: System.out.println("Exit...");break; 
+                       default:System.out.println("Wrong input ...");
+                    }
+                   System.out.println("\n...Return to the SubMenu(Y/N)...");
+                     choice1=input.next();
+                   
+                   }while(choice1.equalsIgnoreCase("y"));break;
+              
+       case 6: do{
+                     System.out.println("\n\n...Store Menu...\n1-Store the Worker Linkedlist into text"
+                      + "\n2-Store the Clothesand Shoes Linkedlist into text "
+                      + "\n3-Store the resturant Linkedlist into text"
+                      + "\n4-Exit..... ");
+               
+                      System.out.println("Enter Your Choice:");
+                      num_choice=input.nextInt();        
+                      switch(num_choice)
+                       {
+                           case 1:capital.storeFileWorker(capital);break;                                   
+                           case 2:capital.storeFileClothes(capital);break;
+                           case 3:capital.storeFileResturant(capital);break;
+                           case 4:System.out.println("Exit...");break; 
+                           default :System.out.println("Wrong input ...");
+                       }
+                      System.out.println("\n...Return to the SubMenu(Y/N)...");
+                      choice1=input.next();
+                   
+                   }while(choice1.equalsIgnoreCase("y"));break;
+           
+          case 7:  System.out.println("Exit....");break;
+          default :System.out.println("Wrong input ...");       
+       
+       
+       }
+       System.out.println("\n...Return to the MainMenu(Y/N)...");
+       choice1 =input.next();
+        
+    }while(choice1.equalsIgnoreCase("y"));
+        
+    }
+    
+    // Function to Display Menu
+    public static void Menu ()  
+     {
+           System.out.println("MENU:\n1-Add information\n2-Update Menu\n"
+              + "3-Search Menu\n"
+              + "4-Delete From Menu\n"
+              + "5-Reports  Menu\n"
+              + "6-Store information of Capital_Mall into Capital_Mall.txt\n"
+              + "7-EXIST ");
+    
+     }
+}
